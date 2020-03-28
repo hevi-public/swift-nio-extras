@@ -71,7 +71,7 @@ public final class NIOHTTPResponseDecompressor: ChannelDuplexHandler, RemovableC
             switch self.state {
             case .compressed(_, let originalLength):
                 while part.readableBytes > 0 {
-                    var buffer = context.channel.allocator.buffer(capacity: 16384)
+                    var buffer = context.channel.allocator.buffer(capacity: 16384000)
                     do {
                         try self.decompressor.decompress(part: &part, buffer: &buffer, originalLength: originalLength)
                     } catch {

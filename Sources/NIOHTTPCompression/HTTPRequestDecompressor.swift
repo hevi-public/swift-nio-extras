@@ -63,7 +63,7 @@ public final class NIOHTTPRequestDecompressor: ChannelDuplexHandler, RemovableCh
 
             while part.readableBytes > 0 {
                 do {
-                    var buffer = context.channel.allocator.buffer(capacity: 16384)
+                    var buffer = context.channel.allocator.buffer(capacity: 16384000)
                     try self.decompressor.decompress(part: &part, buffer: &buffer, originalLength: compression.contentLength)
 
                     context.fireChannelRead(self.wrapInboundOut(.body(buffer)))
